@@ -1,10 +1,13 @@
 /**
+ * Assessment Question: Rock, Paper, Scissors
  * Steven Kwok
- * Question: Rock, Paper, Scissors
  */
 
 // for importing Random and Scanner
 import java.util.*;
+// If do not have enough memory, un-commend two following code
+// import java.util.Scanner;
+// import java.util.Random;
 
 public class RockPaperScissors {
 
