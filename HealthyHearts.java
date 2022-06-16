@@ -4,6 +4,7 @@ public class HealthyHearts {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        System.out.println("--- exec-maven-plugin:1.2.1:exec (default-cli) @ Unit1 ---");
         System.out.print("What is your age? ");
         int age = sc.nextInt();
 
