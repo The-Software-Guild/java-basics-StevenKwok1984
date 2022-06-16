@@ -23,6 +23,9 @@ public class RockPaperScissors {
             // For preventing unexpected error,
             // use do while to assume that the game start at least once
         do {
+            /*
+            Before the game start
+             */
             //get how many rounds with input validation
             int rounds;
             System.out.print("How many rounds would you like to play? ");
@@ -30,58 +33,48 @@ public class RockPaperScissors {
             // Check did user enter an input or not
             if(!scanner.hasNextInt()) {
                 System.out.println("Error, your input is not number");
-                break;
+                break;  // If enter the incorrect data type, stop the game
             }
 
+            // take user input
             rounds = scanner.nextInt();
-
+            // check if user enter the round numbers between 1 and 10
             if (rounds < 1 || rounds > 10) {
                 System.out.println("Error: your input is not between 1 and 10");
-                break;
+                break;      // exit the game with out-of-range number
             }
 
+
+            /*
+            Game Start
+             */
 
             //store game history
             ArrayList<String> gameRecord = new ArrayList<>();
 
-            //store win statistics
+            // initialize the storage of three statistics
             int playerWins = 0;
             int computerWins = 0;
             int ties = 0;
 
+
+            // Start the playing, according to the rounds decided by player
             for (int i = 1; i <= rounds; i++) {
 
-                //make separator and round number
+                // separator and round number
                 System.out.println();
                 System.out.println("Round: " + i);
 
-                int playerChoice;
+                // Player start moving
+                int playerChoice = playerPlay();
 
-                //receive player move with input validation
-                while (true) {
-                    System.out.println("Choose your move:\n" +
-                            "1) Rock\n" +
-                            "2) Paper\n" +
-                            "3) Scissors");
-                    // Check that user input a number
-                    if (!scanner.hasNextInt()){
-                        System.out.println("Error: Please input an integer between 1 and 3");
-                    }
-                    int selectedMove = scanner.nextInt();
-                    // check is the number between 1 and 3
-                    if (selectedMove > 3 || selectedMove < 1) {
-                        System.out.println("Error: Please input an integer between 1 and 3");
-                    } else {
-                        playerChoice = selectedMove;
-                        break;
-                    }
-                }
-
+                // Computer Start Moving
                 int computerChoice = computerPlay();
 
+                // result processing
                 String result = roundOutcome(playerChoice, computerChoice);
 
-                //announce the outcome of the round and increment statistics
+                // Announcing the result outcome of each round and increment statistics
                 switch (result) {
                     case "Tie":
                         ties++;
@@ -131,19 +124,51 @@ public class RockPaperScissors {
 
     }
 
-    //method to output the summary of the round
-    public static void printRoundSummary(int playerMove, int computerMove) {
-        System.out.println("You played: " + getMoveName(playerMove) + "\nComputer Played: " + getMoveName(computerMove));
+    // method for obtaining player input
+    public static int playerPlay() {
+        // user scan
+        Scanner scan = new Scanner(System.in);
+        // initial the player choice
+        int playerChoice;
+        // player start choosing
+        while (true) {
+            System.out.println("Choose your move:\n" +
+                    "1) Rock\n" +
+                    "2) Paper\n" +
+                    "3) Scissors");
+            // Check that user input a number
+            if (!scan.hasNextInt()){
+                System.out.println("Error: Please input an integer between 1 and 3");
+            }
+            int selectedMove = scan.nextInt();
+            // check is the number between 1 and 3 or not
+            if (selectedMove > 3 || selectedMove < 1) {
+                System.out.println("Error: Please input an integer between 1 and 3");
+            } else {
+                playerChoice = selectedMove;
+                break;
+            }
+        }
+        return playerChoice;
     }
 
-    //method to randomly generate computer move
+    // method to randomly generate computer move
     public static int computerPlay() {
         Random rng = new Random();
         return rng.nextInt(2) + 1;
     }
 
-    //method to easily convert "play ids" to the string counterpart
-    //this method should never give errors as this method gets called with program generated parameters.
+    /*
+        Round Summary
+     */
+
+    //method to output the summary of the round
+    public static void printRoundSummary(int playerMove, int computerMove) {
+        System.out.println("You played: " + getMoveName(playerMove) + "\nComputer Played: " + getMoveName(computerMove));
+    }
+
+    // method for converting "play ids" to the string counterpart
+    // for user observing the computer's move easier
     public static String getMoveName(int play) {
         switch (play) {
             case 1:
@@ -157,7 +182,8 @@ public class RockPaperScissors {
         }
     }
 
-    //perform rock paper scissors logic
+    // logic of rock, paper, scissors
+    // check who wins, or a tie result
     public static String roundOutcome(int player, int computer) {
         if (player == computer) {
             return "Tie";
