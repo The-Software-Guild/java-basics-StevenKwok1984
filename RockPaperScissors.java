@@ -1,19 +1,30 @@
+/**
+ * Steven Kwok
+ * Question: Rock, Paper, Scissors
+ */
+
+// for importing Random and Scanner
 import java.util.*;
 
-
 public class RockPaperScissors {
+
+    // Main method for starting the game
     public static void main(String[] args) {
 
         //initialise the scanner
         Scanner scanner = new Scanner(System.in);
 
-        //start program with a do while loop to control if player wishes to play again
-        boolean replay = false;
-        do {
+        // set replay equals true to ensure that the loop runs properly
+        boolean replay = true;
+        // Heading
+        System.out.println("--- exec-maven-plugin:1.2.1:exec (default-cli) @ Unit1 ---");
 
+
+            // For preventing unexpected error,
+            // use do while to assume that the game start at least once
+        do {
             //get how many rounds with input validation
             int rounds;
-            System.out.println("--- exec-maven-plugin:1.2.1:exec (default-cli) @ Unit1 ---");
             System.out.print("How many rounds would you like to play? ");
 
             // Check did user enter an input or not
@@ -93,22 +104,23 @@ public class RockPaperScissors {
                 }
             }
 
+
             //print game summary
             printGameSummary(gameRecord, playerWins, computerWins, ties);
-
 
             // check who win the entire match
             overallWinner(playerWins, computerWins);
 
-            //check for player replay with input validation
+            // ask player that is he want to play again?
             do {
                 System.out.println("Would you like to play again? [yes/no]");
                 String userInput = scanner.next();
-                if (userInput.equals("yes")) {
-                    replay = true;
+                if (userInput.equals("yes")) { // player wants to play again
+                    // continue the loop
                     break;
-                } else if (userInput.equals("no")) {
-                    System.out.println("Thank you for playing!");
+                } else if (userInput.equals("no")) {  // Player wants to stop
+                    System.out.println("Thank you for playing!"); // stop the loop
+                    replay = false;
                     break;
                 } else {
                     System.out.println("invalid input, try again");
@@ -122,29 +134,6 @@ public class RockPaperScissors {
     //method to output the summary of the round
     public static void printRoundSummary(int playerMove, int computerMove) {
         System.out.println("You played: " + getMoveName(playerMove) + "\nComputer Played: " + getMoveName(computerMove));
-    }
-
-
-    // Print gam history
-    public static void printGameSummary(ArrayList<String> gameRecord, int playerWins, int computerWins, int ties) {
-        System.out.println();
-        System.out.println("Game History: ");
-        System.out.println(gameRecord);
-        System.out.println("Player wins: " + playerWins);
-        System.out.println("Computer wins: " + computerWins);
-        System.out.println("Ties: " + ties);
-    }
-
-
-    // Method for checking the overall winner
-    public static void overallWinner(int playerWins, int computerWins) {
-        if (playerWins > computerWins) {
-            System.out.println("You are the overall winner!");
-        } else if (computerWins > playerWins) {
-            System.out.println("The computer is the overall winner!");
-        } else {
-            System.out.println("The game has ended in a draw");
-        }
     }
 
     //method to randomly generate computer move
@@ -182,4 +171,30 @@ public class RockPaperScissors {
             return "Computer Win";
         }
     }
+
+    /*
+        Methods: overall result
+     */
+    // Print game history, with counting of computer winning times, player winning times and ties
+    public static void printGameSummary(ArrayList<String> gameRecord, int playerWins, int computerWins, int ties) {
+        System.out.println();
+        System.out.println("Game History: ");
+        System.out.println(gameRecord);
+        System.out.println("Player wins: " + playerWins);
+        System.out.println("Computer wins: " + computerWins);
+        System.out.println("Ties: " + ties);
+    }
+
+    // Method for judging the overall game winner
+    public static void overallWinner(int playerWins, int computerWins) {
+        if (playerWins > computerWins) {
+            System.out.println("You are the overall winner!");
+        } else if (computerWins > playerWins) {
+            System.out.println("The computer is the overall winner!");
+        } else {
+            System.out.println("The game has ended in a draw");
+        }
+    }
+
+
 }
