@@ -31,7 +31,7 @@ public class RockPaperScissors {
 
 
             //store game history
-            ArrayList<String> playHistory = new ArrayList<>();
+            ArrayList<String> gameRecord = new ArrayList<>();
 
             //store win statistics
             int playerWins = 0;
@@ -74,19 +74,19 @@ public class RockPaperScissors {
                 switch (result) {
                     case "Tie":
                         ties++;
-                        playHistory.add("Tie");
+                        gameRecord.add("Tie");
                         printRoundSummary(playerChoice, computerChoice);
                         System.out.println("Its a tie");
                         break;
                     case "Player Win":
                         playerWins++;
-                        playHistory.add("Player Win");
+                        gameRecord.add("Player Win");
                         printRoundSummary(playerChoice, computerChoice);
                         System.out.println("You win");
                         break;
                     case "Computer Win":
                         computerWins++;
-                        playHistory.add("Computer Win");
+                        gameRecord.add("Computer Win");
                         printRoundSummary(playerChoice, computerChoice);
                         System.out.println("Computer wins");
                         break;
@@ -94,20 +94,11 @@ public class RockPaperScissors {
             }
 
             //print game summary
-            System.out.println();
-            System.out.println("Game History: ");
-            System.out.println(playHistory);
-            System.out.println("Player wins: " + playerWins);
-            System.out.println("Computer wins: " + computerWins);
-            System.out.println("Ties: " + ties);
+            printGameSummary(gameRecord, playerWins, computerWins, ties);
 
-            if (playerWins > computerWins) {
-                System.out.println("You are the overall winner!");
-            } else if (computerWins > playerWins) {
-                System.out.println("The computer is the overall winner!");
-            } else {
-                System.out.println("The game has ended in a draw");
-            }
+
+            // check who win the entire match
+            overallWinner(playerWins, computerWins);
 
             //check for player replay with input validation
             do {
@@ -131,6 +122,29 @@ public class RockPaperScissors {
     //method to output the summary of the round
     public static void printRoundSummary(int playerMove, int computerMove) {
         System.out.println("You played: " + getMoveName(playerMove) + "\nComputer Played: " + getMoveName(computerMove));
+    }
+
+
+    // Print gam history
+    public static void printGameSummary(ArrayList<String> gameRecord, int playerWins, int computerWins, int ties) {
+        System.out.println();
+        System.out.println("Game History: ");
+        System.out.println(gameRecord);
+        System.out.println("Player wins: " + playerWins);
+        System.out.println("Computer wins: " + computerWins);
+        System.out.println("Ties: " + ties);
+    }
+
+
+    // Method for checking the overall winner
+    public static void overallWinner(int playerWins, int computerWins) {
+        if (playerWins > computerWins) {
+            System.out.println("You are the overall winner!");
+        } else if (computerWins > playerWins) {
+            System.out.println("The computer is the overall winner!");
+        } else {
+            System.out.println("The game has ended in a draw");
+        }
     }
 
     //method to randomly generate computer move
