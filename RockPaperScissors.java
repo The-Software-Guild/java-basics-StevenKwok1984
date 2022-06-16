@@ -13,6 +13,7 @@ public class RockPaperScissors {
 
             //get how many rounds with input validation
             int rounds;
+            System.out.println("--- exec-maven-plugin:1.2.1:exec (default-cli) @ Unit1 ---");
             System.out.print("How many rounds would you like to play? ");
 
             // Check did user enter an input or not
