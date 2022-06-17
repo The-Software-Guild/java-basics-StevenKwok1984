@@ -1,4 +1,4 @@
-/**
+package src; /**
  * Assessment Question: Rock, Paper, Scissors
  * Steven Kwok
  */

@@ -1,3 +1,5 @@
+package src;
+
 /**
  * Assessment Question: Summative Sums
  * Steven Kwok
